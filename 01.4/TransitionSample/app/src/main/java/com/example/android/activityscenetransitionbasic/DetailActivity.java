@@ -59,7 +59,6 @@ public class DetailActivity extends AppCompatActivity {
         mHeaderImageView = findViewById(R.id.imageview_header);
         mHeaderTitle = findViewById(R.id.textview_title);
 
-        // BEGIN_INCLUDE(detail_set_view_name)
         /*
          * Set the name of the view's which will be transition to, using the static values above.
          * This could be done in the layout XML, but exposing it via static variables allows easy
@@ -67,7 +66,6 @@ public class DetailActivity extends AppCompatActivity {
          */
         ViewCompat.setTransitionName(mHeaderImageView, VIEW_NAME_HEADER_IMAGE);
         ViewCompat.setTransitionName(mHeaderTitle, VIEW_NAME_HEADER_TITLE);
-        // END_INCLUDE(detail_set_view_name)
 
         loadItem();
     }
@@ -92,9 +90,9 @@ public class DetailActivity extends AppCompatActivity {
      */
     private void loadThumbnail() {
         Picasso.with(mHeaderImageView.getContext())
-                .load(mItem.getThumbnailUrl())
-                .noFade()
-                .into(mHeaderImageView);
+            .load(mItem.getThumbnailUrl())
+            .noFade()
+            .into(mHeaderImageView);
     }
 
     /**
@@ -102,10 +100,10 @@ public class DetailActivity extends AppCompatActivity {
      */
     private void loadFullSizeImage() {
         Picasso.with(mHeaderImageView.getContext())
-                .load(mItem.getPhotoUrl())
-                .noFade()
-                .noPlaceholder()
-                .into(mHeaderImageView);
+            .load(mItem.getPhotoUrl())
+            .noFade()
+            .noPlaceholder()
+            .into(mHeaderImageView);
     }
 
     /**

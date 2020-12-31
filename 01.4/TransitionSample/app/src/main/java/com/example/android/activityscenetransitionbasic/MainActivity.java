@@ -16,6 +16,7 @@
 
 package com.example.android.activityscenetransitionbasic;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +41,40 @@ import com.squareup.picasso.Picasso;
  */
 public class MainActivity extends AppCompatActivity {
 
+    private final AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+
+        /**
+         * Called when an item in the {@link android.widget.GridView} is clicked. Here will launch
+         * the {@link DetailActivity}, using the Scene Transition animation functionality.
+         */
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            Activity context = MainActivity.this;
+            Item item = (Item) adapterView.getItemAtPosition(position);
+
+            // Construct an Intent as normal
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra(DetailActivity.EXTRA_PARAM_ID, item.getId());
+
+            /*
+             * Now create an {@link android.app.ActivityOptions} instance using the
+             * {@link ActivityOptionsCompat#makeSceneTransitionAnimation(Activity, Pair[])}
+             * factory method.
+             */
+            @SuppressWarnings("unchecked")
+            ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                context,
+                // Now we provide a list of Pair items which contain the view we can transitioning
+                // from, and the name of the view it is transitioning to, in the launched activity
+                new Pair<>(view.findViewById(R.id.imageview_item), DetailActivity.VIEW_NAME_HEADER_IMAGE),
+                new Pair<>(view.findViewById(R.id.textview_name), DetailActivity.VIEW_NAME_HEADER_TITLE)
+            );
+
+            // Now we can start the Activity, providing the activity options as a bundle
+            ActivityCompat.startActivity(context, intent, activityOptions.toBundle());
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,47 +83,8 @@ public class MainActivity extends AppCompatActivity {
         // Setup the GridView and set the adapter
         GridView grid = findViewById(R.id.grid);
         grid.setOnItemClickListener(mOnItemClickListener);
-        GridAdapter adapter = new GridAdapter();
-        grid.setAdapter(adapter);
+        grid.setAdapter(new GridAdapter());
     }
-
-    private final AdapterView.OnItemClickListener mOnItemClickListener
-            = new AdapterView.OnItemClickListener() {
-
-        /**
-         * Called when an item in the {@link android.widget.GridView} is clicked. Here will launch
-         * the {@link DetailActivity}, using the Scene Transition animation functionality.
-         */
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            Item item = (Item) adapterView.getItemAtPosition(position);
-
-            // Construct an Intent as normal
-            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-            intent.putExtra(DetailActivity.EXTRA_PARAM_ID, item.getId());
-
-            // BEGIN_INCLUDE(start_activity)
-            /*
-             * Now create an {@link android.app.ActivityOptions} instance using the
-             * {@link ActivityOptionsCompat#makeSceneTransitionAnimation(Activity, Pair[])} factory
-             * method.
-             */
-            @SuppressWarnings("unchecked")
-            ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    MainActivity.this,
-
-                    // Now we provide a list of Pair items which contain the view we can transitioning
-                    // from, and the name of the view it is transitioning to, in the launched activity
-                    new Pair<>(view.findViewById(R.id.imageview_item),
-                            DetailActivity.VIEW_NAME_HEADER_IMAGE),
-                    new Pair<>(view.findViewById(R.id.textview_name),
-                            DetailActivity.VIEW_NAME_HEADER_TITLE));
-
-            // Now we can start the Activity, providing the activity options as a bundle
-            ActivityCompat.startActivity(MainActivity.this, intent, activityOptions.toBundle());
-            // END_INCLUDE(start_activity)
-        }
-    };
 
     /**
      * {@link android.widget.BaseAdapter} which displays items.
