@@ -17,6 +17,7 @@
 package com.example.android.activityscenetransitionbasic;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
@@ -25,16 +26,38 @@ import android.widget.FrameLayout;
  */
 public class SquareFrameLayout extends FrameLayout {
 
+    private int mMaxWidth, mMaxHeight;
+
     public SquareFrameLayout(Context context) {
         this(context, null);
     }
 
     public SquareFrameLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, 0, 0);
     }
 
-    public SquareFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    public SquareFrameLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+            attrs,
+            R.styleable.SquareFrameLayout,
+            defStyleAttr, defStyleRes
+        );
+        try {
+            mMaxWidth = a.getDimensionPixelSize(R.styleable.SquareFrameLayout_maxWidth, Integer.MAX_VALUE);
+            mMaxHeight = a.getDimensionPixelSize(R.styleable.SquareFrameLayout_maxHeight, Integer.MAX_VALUE);
+        } finally {
+            a.recycle();
+        }
+    }
+
+    public int getMaximumWidth() {
+        return mMaxWidth;
+    }
+
+    public int getMaximumHeight() {
+        return mMaxHeight;
     }
 
     @Override
@@ -52,7 +75,7 @@ public class SquareFrameLayout extends FrameLayout {
             return;
         }
 
-        final int size;
+        int size;
         if (widthSize == 0 || heightSize == 0) {
             // If one of the dimensions has no restriction on size, set both dimensions to be the
             // on that does
@@ -61,6 +84,14 @@ public class SquareFrameLayout extends FrameLayout {
             // Both dimensions have restrictions on size, set both dimensions to be the
             // smallest of the two
             size = Math.min(widthSize, heightSize);
+        }
+
+        final int minSize = Math.max(this.getMinimumWidth(), this.getMinimumHeight());
+        final int maxSize = Math.min(this.getMaximumWidth(), this.getMaximumHeight());
+        if (size > maxSize) {
+            size = maxSize;
+        } else if (size < minSize) {
+            size = minSize;
         }
 
         final int newMeasureSpec = MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
