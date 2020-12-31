@@ -86,8 +86,9 @@ public class SquareFrameLayout extends FrameLayout {
             size = Math.min(widthSize, heightSize);
         }
 
-        final int minSize = Math.max(this.getMinimumWidth(), this.getMinimumHeight());
-        final int maxSize = Math.min(this.getMaximumWidth(), this.getMaximumHeight());
+        // bound the size by the view's min and max dimensions
+        final int minSize = Math.max(getMinimumWidth(), getMinimumHeight());
+        final int maxSize = Math.min(getMaximumWidth(), getMaximumHeight());
         if (size > maxSize) {
             size = maxSize;
         } else if (size < minSize) {
