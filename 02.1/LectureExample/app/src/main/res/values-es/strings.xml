@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lecture Example</string>
+    <string name="count_button_text">Count</string>
+    <string name="name_button_text">What is your name?</string>
+    <string name="enter_name_edit_hint">Enter your name...</string>
+    <string name="enter_name_button_text">Save</string>
+    <string name="activity_enter_name_label">Enter Name</string>
+</resources>
