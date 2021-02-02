@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Guessing Game</string>
+    <string name="rules_text">I\'ve chosen a number 1-10, guess what it is?</string>
+    <string name="guess_button">Guess</string>
+    <string name="reset_button">Reset</string>
+    <string name="secret_number_text">Secret Number: %1$d</string>
+    <string name="guess_empty_error">Please enter a number!</string>
+    <string name="winning_text">You guessed the secret number %1$d! in %2$d tries.</string>
+    <string name="guess_high_text">To high!</string>
+    <string name="guess_low_text">To Low!</string>
+    <string name="guess_out_of_range">The number must be between 1 and 10!</string>
+</resources>
