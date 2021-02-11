@@ -1,0 +1,19 @@
+<resources>
+
+    <string name="app_name">Droid Cafe</string>
+    <string name="title_text">Droid Desserts</string>
+    <string name="donut_text">Donuts are glazed and sprinked with candy.</string>
+    <string name="ice_cream_sandwich_text">Ice cream sandwiches have chocolate wafers and vanilla filling.</string>
+    <string name="froyo_text">FroYo is premium self-serve frozen yogurt.</string>
+    <string name="toast_add_cart_froyo">FroYo added to cart.</string>
+    <string name="toast_add_cart_sandwich">Ice Cream Sandwich added to cart.</string>
+    <string name="toast_add_cart_donut">Donut added to cart.</string>
+    <string name="activity_order">My Cart</string>
+
+    <string-array name="contact_types">
+        <item>Personal</item>
+        <item>Work</item>
+        <item>Other</item>
+    </string-array>
+
+</resources>
