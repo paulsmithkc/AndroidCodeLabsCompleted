@@ -1,0 +1,43 @@
+<resources>
+
+    <string name="app_name">Droid Cafe</string>
+    <string name="title_text">Droid Desserts</string>
+    <string name="donut_text">Donuts are glazed and sprinked with candy.</string>
+    <string name="ice_cream_sandwich_text">Ice cream sandwiches have chocolate wafers and vanilla filling.</string>
+    <string name="froyo_text">FroYo is premium self-serve frozen yogurt.</string>
+    <string name="toast_add_cart_froyo">FroYo added to cart.</string>
+    <string name="toast_add_cart_sandwich">Ice Cream Sandwich added to cart.</string>
+    <string name="toast_add_cart_donut">Donut added to cart.</string>
+    <string name="activity_order">Place Order</string>
+    <string name="delivery_date_text">Delivery Date</string>
+    <string name="delivery_time_text">Delivery Time</string>
+    <string name="time_format">hh:mm a</string>
+    <string name="date_format">yyyy-MM-dd</string>
+    <string name="action_order">Order</string>
+    <string name="action_status">Status</string>
+    <string name="action_favorites">Favorites</string>
+    <string name="action_contact">Contact</string>
+    <string name="place_order_btn">Place Order</string>
+    <string name="activity_product_detail">Product Detail</string>
+    <string name="activity_cart">Shopping Cart</string>
+    <string name="cart_subtotal">Subtotal: %s</string>
+    <string name="cart_tax">Tax: %s</string>
+    <string name="cart_total">Total: %s</string>
+    <string name="add_to_cart_button_text">Add to Cart</string>
+
+    <string-array name="contact_types">
+        <item>Personal</item>
+        <item>Work</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="quantities">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,77 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.DroidCafe" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primaryDarkColor</item>
+        <!-- Customize your theme here. -->
+        <item name="actionBarStyle">@style/ActionBarStyle</item>
+        <item name="floatingActionButtonStyle">@style/FloatingActionButton</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <!-- Widget Styles -->
+    <style name="ActionBarStyle" parent="Widget.MaterialComponents.ActionBar.Primary">
+    </style>
+    <style name="FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/secondaryLightColor</item>
+        <item name="android:backgroundTint">@color/secondaryLightColor</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="shapeAppearance">@style/FloatingActionButtonShape</item>
+        <item name="shapeAppearanceOverlay">@style/FloatingActionButtonShape</item>
+    </style>
+    <style name="FloatingActionButtonShape" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="MaterialButton" parent="Widget.MaterialComponents.Button">
+        <!--<item name="android:background">@drawable/frame_angle_cuts</item>-->
+        <item name="android:backgroundTint">@color/secondaryLightColor</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="shapeAppearance">@style/MaterialButtonShape</item>
+    </style>
+    <style name="MaterialButtonOutline" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/secondaryLightColor</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">@color/secondaryLightColor</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="shapeAppearance">@style/MaterialButtonShape</item>
+    </style>
+    <style name="MaterialButtonText" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/secondaryLightColor</item>
+    </style>
+    <style name="MaterialButtonShape" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomRight">8dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <!-- Targeted Styles -->
+    <style name="ProductNameStyle">=
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="ProductDescriptionStyle">
+        <item name="android:textColor">@color/mutedTextColor</item>
+    </style>
+    <style name="ProductPriceStyle">
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+    <style name="DeleteButton">
+        <item name="android:background">@null</item>
+        <item name="android:backgroundTint">@color/danger</item>
+        <item name="android:tint">@color/textColor</item>
+        <item name="android:src">@drawable/ic_delete</item>
+    </style>
+
+</resources>
