@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_cart_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_cart_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_cart_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:transitionName="image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/donut_circle" />
+
+        <Spinner
+            android:id="@+id/item_cart_quantity"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:entries="@array/quantities"
+            android:minWidth="50dp"
+            android:spinnerMode="dropdown"
+            android:transitionName="quantity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_cart_image"
+            app:layout_constraintTop_toBottomOf="@+id/item_cart_name" />
+
+        <TextView
+            android:id="@+id/item_cart_name"
+            style="@style/ProductNameStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:transitionName="name"
+            app:layout_constraintStart_toEndOf="@+id/item_cart_image"
+            app:layout_constraintTop_toTopOf="@+id/item_cart_image"
+            tools:text="Product Name" />
+
+        <TextView
+            android:id="@+id/item_cart_price"
+            style="@style/ProductPriceStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:transitionName="price"
+            app:layout_constraintBaseline_toBaselineOf="@+id/item_cart_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Price" />
+
+        <ImageButton
+            android:id="@+id/item_cart_delete"
+            style="@style/DeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
