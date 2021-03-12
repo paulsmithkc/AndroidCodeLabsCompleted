@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        intentFilter.addAction(Intent.ACTION_SHUTDOWN);
         intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
         intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
+        intentFilter.addAction(Intent.ACTION_LOCALE_CHANGED);
         intentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
         intentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
