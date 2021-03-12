@@ -1,11 +1,15 @@
 package edu.ranken.prsmith.localbroadcasts;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
 
+import androidx.annotation.WorkerThread;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class MyService extends Service {
@@ -24,13 +28,29 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(LOG_TAG, "MyService.onStartCommand");
+        showForegroundNotification();
+
         if (worker != null) {
             worker.cancelled = true;
             worker.interrupt();
         }
         worker = new WorkerThread();
         worker.start();
+
         return START_STICKY;
+    }
+
+    private void showForegroundNotification() {
+        if (Build.VERSION.SDK_INT >= 26) {
+            Notification notification =
+                new Notification.Builder(this, MyApplication.DEFAULT_NOTIFICATION_CHANNEL_ID)
+                    .setContentTitle("Local Broadcasts")
+                    .setContentText("Currently running...")
+                    .setSmallIcon(R.drawable.ic_flight)
+                    .build();
+
+            startForeground(MyApplication.FOREGROUND_NOTIFICATION_ID, notification);
+        }
     }
 
     @Override

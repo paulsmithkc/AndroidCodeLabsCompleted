@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -50,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
         Log.i(LOG_TAG, "MainActivity.onStart");
         super.onStart();
         localBroadcastManager.registerReceiver(receiver, intentFilter);
+
+        Intent serviceIntent = new Intent(this, MyService.class);
+        if (Build.VERSION.SDK_INT >= 26) {
+            startForegroundService(serviceIntent);
+        } else {
+            startService(serviceIntent);
+        }
     }
 
     @Override
@@ -57,5 +65,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i(LOG_TAG, "MainActivity.onStop");
         super.onStop();
         localBroadcastManager.unregisterReceiver(receiver);
+
+        Intent serviceIntent = new Intent(this, MyService.class);
+        stopService(serviceIntent);
     }
 }
