@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,20 +14,16 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.List;
-
 import edu.ranken.prsmith.whowroteit.R;
 import edu.ranken.prsmith.whowroteit.WhoWroteIt;
 import edu.ranken.prsmith.whowroteit.adapter.BookAdapter;
 import edu.ranken.prsmith.whowroteit.model.AsyncTaskResult;
-import edu.ranken.prsmith.whowroteit.model.Book;
 import edu.ranken.prsmith.whowroteit.model.BookApiResponse;
 import edu.ranken.prsmith.whowroteit.model.BookDataSource;
 

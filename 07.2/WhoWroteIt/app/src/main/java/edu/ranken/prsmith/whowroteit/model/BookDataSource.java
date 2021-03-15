@@ -42,6 +42,7 @@ public class BookDataSource {
     public enum Filter {
         ALL, EBOOKS, FREE_EBOOKS, PAID_EBOOKS, PARTIAL, FULL
     }
+
     // Sort search results. Acceptable values are:
     // "newest" - Most recently published.
     // "relevance" - Relevance to search terms.
@@ -49,6 +50,7 @@ public class BookDataSource {
     public enum OrderBy {
         NEWEST, RELEVANCE
     }
+
     // Maximum number of results to return. Acceptable values are 0 to 40, inclusive.
     private static final String PARAM_MAX_RESULTS = "maxResults";
 
@@ -80,8 +82,7 @@ public class BookDataSource {
 
             // read response
             try (InputStream stream = conn.getInputStream()) {
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream)))
-                {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
                     Gson gson = new Gson();
                     BookApiResponse response = gson.fromJson(reader, BookApiResponse.class);
                     return response;

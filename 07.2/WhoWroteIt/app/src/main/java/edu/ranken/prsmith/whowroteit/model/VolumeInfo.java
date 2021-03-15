@@ -8,6 +8,7 @@ public class VolumeInfo implements Serializable {
     public String title;
     public String subtitle;
     public ArrayList<String> authors;
+
     public String publisher;
     public String publishedDate;
     public String description;
