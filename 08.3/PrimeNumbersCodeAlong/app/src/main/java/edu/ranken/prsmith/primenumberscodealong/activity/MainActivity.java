@@ -2,6 +2,7 @@ package edu.ranken.prsmith.primenumberscodealong.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.BroadcastReceiver;
@@ -10,11 +11,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.ranken.prsmith.primenumberscodealong.PrimesApp;
 import edu.ranken.prsmith.primenumberscodealong.R;
+import edu.ranken.prsmith.primenumberscodealong.adapter.NumberListAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private LocalBroadcastManager localBroadcastManager;
     private BroadcastReceiver receiver;
     private IntentFilter intentFilter;
+    private List<Long> primes;
+    private NumberListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
                         circleProgress.setVisibility(View.VISIBLE);
                         horizontalProgress.setProgress((int) (100 * current / max));
                         highestText.setText(String.valueOf(current));
+
+                        primes.add(current);
+                        adapter.notifyDataSetChanged();
+                        recyclerView.scrollToPosition(primes.size() - 1);
                         break;
                     }
                 }
@@ -82,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
 
         // register the receiver
         localBroadcastManager.registerReceiver(receiver, intentFilter);
+
+        // init recyclerview
+        primes = new ArrayList<>();
+        adapter = new NumberListAdapter(this, primes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

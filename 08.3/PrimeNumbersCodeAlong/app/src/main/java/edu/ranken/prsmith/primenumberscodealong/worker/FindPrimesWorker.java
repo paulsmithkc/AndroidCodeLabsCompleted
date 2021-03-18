@@ -20,7 +20,7 @@ public class FindPrimesWorker extends Worker {
     public FindPrimesWorker(@NonNull Context context, @NonNull WorkerParameters params) {
         super(context, params);
         current = 2;
-        max = 1_000_000;
+        max = 100_000;
         localBroadcastManager = LocalBroadcastManager.getInstance(context);
     }
 
