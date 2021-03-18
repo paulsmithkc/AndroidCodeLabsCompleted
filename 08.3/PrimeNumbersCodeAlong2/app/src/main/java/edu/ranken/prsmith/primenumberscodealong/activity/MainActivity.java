@@ -129,11 +129,23 @@ public class MainActivity extends AppCompatActivity {
                 circleProgress.setVisibility(value ? View.VISIBLE : View.GONE);
             }
         });
+        currentLiveData.observe(this, new Observer<Long>() {
+            @Override
+            public void onChanged(Long value) {
+                current = value;
+                horizontalProgress.setProgress((int)(100 * current / max));
+            }
+        });
         primesLiveData.observe(this, new Observer<List<Long>>() {
             @Override
             public void onChanged(List<Long> value) {
                 adapter.setItems(value);
                 recyclerView.scrollToPosition(value.size() - 1);
+                if (value != null && value.size() > 0) {
+                    highestText.setText(value.get(value.size() - 1).toString());
+                } else {
+                    highestText.setText(null);
+                }
             }
         });
     }
