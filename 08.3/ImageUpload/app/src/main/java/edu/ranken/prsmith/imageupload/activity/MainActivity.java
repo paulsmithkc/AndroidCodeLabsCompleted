@@ -4,6 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -24,6 +29,7 @@ import java.io.File;
 
 import edu.ranken.prsmith.imageupload.BuildConfig;
 import edu.ranken.prsmith.imageupload.R;
+import edu.ranken.prsmith.imageupload.worker.UploadWorker;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "ImageUpload";
@@ -31,11 +37,12 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_GALLERY = 2;
 
     // views
-    private ImageView uploadImage;
-    private ProgressBar uploadProgress;
-    private Button uploadButton;
+    private ImageView _uploadImage;
+    private ProgressBar _uploadProgress;
+    private Button _uploadButton;
 
     // data
+    private WorkManager _workManager;
     private String _outputFile;
     private Bitmap _outputImage;
 
@@ -45,9 +52,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // find views
-        uploadImage = findViewById(R.id.upload_image);
-        uploadProgress = findViewById(R.id.upload_progress);
-        uploadButton = findViewById(R.id.upload_button);
+        _uploadImage = findViewById(R.id.upload_image);
+        _uploadProgress = findViewById(R.id.upload_progress);
+        _uploadButton = findViewById(R.id.upload_button);
+
+        // get work manager
+        _workManager = WorkManager.getInstance(this);
     }
 
     /**
@@ -96,11 +106,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (ActivityNotFoundException ex) {
             String error = getString(R.string.error_activity_not_found);
             Log.e(LOG_TAG, error, ex);
-            Snackbar.make(uploadImage, error, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(_uploadImage, error, Snackbar.LENGTH_SHORT).show();
         } catch (Exception ex) {
             String error = getString(R.string.error_create_output_file);
             Log.e(LOG_TAG, error, ex);
-            Snackbar.make(uploadImage, error, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(_uploadImage, error, Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -111,6 +121,29 @@ public class MainActivity extends AppCompatActivity {
      * @see <a href="https://developer.android.com/topic/libraries/architecture/workmanager">Schedule tasks with WorkManager</a>
      */
     public void onUploadImage(View view) {
+        if (_outputFile == null) {
+            Snackbar.make(_uploadImage, R.string.error_take_picture, Snackbar.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(_uploadImage, R.string.mesage_start_upload, Snackbar.LENGTH_SHORT).show();
+
+            Data uploadData =
+                new Data.Builder()
+                .putString(UploadWorker.PARAM_SOURCE, _outputFile)
+                .build();
+
+            Constraints uploadConstraints =
+                new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+            OneTimeWorkRequest uploadRequest =
+                new OneTimeWorkRequest.Builder(UploadWorker.class)
+                .setInputData(uploadData)
+                .setConstraints(uploadConstraints)
+                .build();
+
+            _workManager.enqueue(uploadRequest);
+        }
     }
 
     /**
@@ -129,11 +162,11 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             if (resultCode == RESULT_OK) {
                 _outputImage = BitmapFactory.decodeFile(_outputFile);
-                uploadImage.setImageBitmap(_outputImage);
+                _uploadImage.setImageBitmap(_outputImage);
             } else {
                 _outputFile = null;
                 _outputImage = null;
-                uploadImage.setImageResource(R.drawable.ic_image_search);
+                _uploadImage.setImageResource(R.drawable.ic_image_search);
             }
         }
         if (requestCode == REQUEST_IMAGE_GALLERY) {
@@ -156,9 +189,9 @@ public class MainActivity extends AppCompatActivity {
         _outputFile = bundle.getString("_outputFile");
         _outputImage = bundle.getParcelable("_outputImage");
         if (_outputImage != null) {
-            uploadImage.setImageBitmap(_outputImage);
+            _uploadImage.setImageBitmap(_outputImage);
         } else {
-            uploadImage.setImageResource(R.drawable.ic_image_search);
+            _uploadImage.setImageResource(R.drawable.ic_image_search);
         }
     }
 }

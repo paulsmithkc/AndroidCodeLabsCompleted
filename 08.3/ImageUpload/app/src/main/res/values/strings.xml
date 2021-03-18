@@ -3,4 +3,6 @@
     <string name="upload_button">Upload</string>
     <string name="error_create_output_file">Failed to create output file.</string>
     <string name="error_activity_not_found">Activity not found.</string>
+    <string name="error_take_picture">Please take a picture.</string>
+    <string name="mesage_start_upload">Starting upload.</string>
 </resources>

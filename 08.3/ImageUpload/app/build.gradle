@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
 }
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -14,6 +18,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // should correspond to key/value pairs inside the file
+        buildConfigField("String", "IMGUR_CLIENT_ID", apikeyProperties['IMGUR_CLIENT_ID'])
+        buildConfigField("String", "IMGUR_CLIENT_SECRET", apikeyProperties['IMGUR_CLIENT_SECRET'])
     }
 
     buildTypes {
