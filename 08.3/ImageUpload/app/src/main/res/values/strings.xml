@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Image Upload</string>
+    <string name="upload_button">Upload</string>
+    <string name="error_create_output_file">Failed to create output file.</string>
+    <string name="error_activity_not_found">Activity not found.</string>
+</resources>
