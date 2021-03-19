@@ -2,15 +2,15 @@ package edu.ranken.prsmith.fortunecookie.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -19,6 +19,7 @@ import edu.ranken.prsmith.fortunecookie.FortuneCookieApp;
 import edu.ranken.prsmith.fortunecookie.R;
 import edu.ranken.prsmith.fortunecookie.model.Fortune;
 import edu.ranken.prsmith.fortunecookie.model.FortuneDataSource;
+import edu.ranken.prsmith.fortunecookie.worker.GetFortuneWorker;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "FortuneCookie";
@@ -75,6 +76,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         handler.removeCallbacks(updateTime);
+    }
+
+    public void onRefresh(View view) {
+        WorkManager workManager = WorkManager.getInstance(this);
+
+        OneTimeWorkRequest workRequest =
+            new OneTimeWorkRequest.Builder(GetFortuneWorker.class)
+            .build();
+
+        workManager.enqueue(workRequest);
     }
 
     private void showFortune() {
