@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">FortuneCookie</string>
+    <string name="app_name">Fortune Cookie</string>
+    <string name="notification_default_channel_name">Default Channel</string>
+    <string name="notification_default_channel_description">This is the default notification channel</string>
+    <string name="notification_new_fortune">New Fortune!</string>
+    <string name="loading_fortune">Loading fortune</string>
+    <string name="fortune_time_minutes_and_seconds">%d minutes and %d seconds ago</string>
+    <string name="fortune_time_seconds">%d seconds ago</string>
 </resources>
