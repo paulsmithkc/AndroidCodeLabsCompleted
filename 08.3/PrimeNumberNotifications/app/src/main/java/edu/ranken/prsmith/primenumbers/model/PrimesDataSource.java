@@ -20,7 +20,7 @@ public class PrimesDataSource {
     @MainThread
     public PrimesDataSource() {
         current = 2;
-        max = 10_000_000;
+        max = 1_000_000;
         primes = new ArrayList<>();
 
         currentLiveData = new MutableLiveData<>(current);

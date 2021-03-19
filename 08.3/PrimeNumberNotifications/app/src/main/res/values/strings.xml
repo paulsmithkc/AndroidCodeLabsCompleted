@@ -2,4 +2,7 @@
     <string name="app_name">Prime Numbers</string>
     <string name="notification_default_channel_name">Default Channel</string>
     <string name="notification_default_channel_description">This is the default notification channel</string>
+    <string name="notification_foreground_text">Currently running...</string>
+    <string name="notification_finished_text">Finished!</string>
+    <string name="notification_stop_action">Stop</string>
 </resources>

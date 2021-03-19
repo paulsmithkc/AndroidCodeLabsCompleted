@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.work.Constraints;
 import androidx.work.Data;
@@ -28,6 +29,7 @@ public class PrimesApp extends Application {
     public static final String JOB_NAME_FIND_PRIMES = "findPrimes";
     public static final String DEFAULT_NOTIFICATION_CHANNEL_ID = "defaultChannel";
     public static final int FOREGROUND_NOTIFICATION_ID = 1;
+    public static final int FINISHED_NOTIFICATION_ID = 2;
 
     private PrimesDataSource primesDataSource;
     private WorkManager workManager;
@@ -38,7 +40,7 @@ public class PrimesApp extends Application {
         primesDataSource = new PrimesDataSource();
         workManager = WorkManager.getInstance(this);
 
-        createNotificationChannel();
+        createNotificationChannels();
         enqueueFindPrimes();
     }
 
@@ -46,14 +48,14 @@ public class PrimesApp extends Application {
         return primesDataSource;
     }
 
-    private void createNotificationChannel() {
+    private void createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= 26) {
-            NotificationManager mgr = getSystemService(NotificationManager.class);
+            NotificationManager mgr = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
             NotificationChannel channel = new NotificationChannel(
                 DEFAULT_NOTIFICATION_CHANNEL_ID,
                 getString(R.string.notification_default_channel_name),
-                NotificationManager.IMPORTANCE_HIGH
+                NotificationManager.IMPORTANCE_LOW
             );
             channel.setDescription(getString(R.string.notification_default_channel_description));
 
