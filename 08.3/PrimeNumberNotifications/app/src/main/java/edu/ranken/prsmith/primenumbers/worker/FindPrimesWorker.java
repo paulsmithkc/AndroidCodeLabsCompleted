@@ -99,6 +99,7 @@ public class FindPrimesWorker extends Worker {
         PendingIntent stopIntent =
             WorkManager.getInstance(context).createCancelPendingIntent(getId());
 
+        // build notification
         Notification notification =
             new NotificationCompat.Builder(context, PrimesApp.DEFAULT_NOTIFICATION_CHANNEL_ID)
                 .setContentTitle(context.getString(R.string.app_name))
@@ -109,6 +110,7 @@ public class FindPrimesWorker extends Worker {
                 .setOngoing(true)
                 .build();
 
+        // show notification while worker is running
         setForegroundAsync(new ForegroundInfo(PrimesApp.FOREGROUND_NOTIFICATION_ID, notification));
     }
 
@@ -119,14 +121,17 @@ public class FindPrimesWorker extends Worker {
         PendingIntent contentIntent =
             PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        // build notification
         Notification notification =
             new NotificationCompat.Builder(context, PrimesApp.DEFAULT_NOTIFICATION_CHANNEL_ID)
                 .setContentTitle(context.getString(R.string.app_name))
                 .setContentText(context.getString(R.string.notification_finished_text))
                 .setSmallIcon(R.drawable.ic_done)
                 .setContentIntent(contentIntent)
+                .setAutoCancel(true)
                 .build();
 
+        // show notification now
         NotificationManager mgr = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mgr.notify(PrimesApp.FINISHED_NOTIFICATION_ID, notification);
     }
