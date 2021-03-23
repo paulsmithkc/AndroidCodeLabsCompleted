@@ -74,6 +74,7 @@ public class GetFortuneWorker extends Worker {
                                && Objects.equals(newFortune.timestamp, oldFortune.timestamp)) {
                         // nothing changed
                         Log.i(LOG_TAG, "nothing new");
+                        dataSource.setFortune(newFortune);
                     } else {
                         // new fortune, update and send notification
                         Log.i(LOG_TAG, "new fortune!");

@@ -1,5 +1,6 @@
 package edu.ranken.prsmith.fortunecookie.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -12,7 +13,10 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private FortuneDataSource dataSource;
     private LiveData<Fortune> fortuneLiveData;
 
-    // handler
+    // used to update the time elapsed, once per second
     private final Handler handler = new Handler();
     private final Runnable updateTime = new Runnable() {
         @Override
@@ -69,13 +73,8 @@ public class MainActivity extends AppCompatActivity {
         // observe data
         fortuneLiveData.observe(this, (Fortune value) -> {
             showFortune();
+            Snackbar.make(fortuneText, R.string.fortune_refreshed, Snackbar.LENGTH_SHORT).show();
         });
-//        fortuneLiveData.observe(this, new Observer<Fortune>() {
-//            @Override
-//            public void onChanged(Fortune value) {
-//                showFortune();
-//            }
-//        });
     }
 
     @Override
@@ -88,6 +87,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         handler.removeCallbacks(updateTime);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh: {
+                onRefresh(fortuneText);
+                return true;
+            }
+            default: {
+                return super.onOptionsItemSelected(item);
+            }
+        }
     }
 
     public void onRefresh(View view) {

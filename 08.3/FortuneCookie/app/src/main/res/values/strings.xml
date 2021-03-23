@@ -6,5 +6,7 @@
     <string name="loading_fortune">Loading fortune</string>
     <string name="fortune_time_minutes_and_seconds">%d minutes and %d seconds ago</string>
     <string name="fortune_time_seconds">%d seconds ago</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="fortune_refreshed">Fortune Refreshed.</string>
     <string name="error_no_network">No network connection available.</string>
 </resources>
