@@ -65,7 +65,7 @@ public class GetFortuneWorker extends Worker {
                     Fortune newFortune = gson.fromJson(reader, Fortune.class);
 
                     // is this a new fortune
-                    Fortune oldFortune = dataSource.getFortuneLiveData().getValue();
+                    Fortune oldFortune = dataSource.getFortune();
                     if (oldFortune == null) {
                         // first time reading the fortune
                         Log.i(LOG_TAG, "fortune initialized");

@@ -77,6 +77,6 @@ public class FortuneCookieApp extends Application {
             watchFortuneRequest
         );
 
-        Log.i(LOG_TAG, "watch fortune enqueued");
+        Log.i(LOG_TAG, "worker enqueued");
     }
 }

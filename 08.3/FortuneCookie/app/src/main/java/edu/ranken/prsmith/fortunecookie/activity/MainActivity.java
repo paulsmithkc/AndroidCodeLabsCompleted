@@ -2,6 +2,7 @@ package edu.ranken.prsmith.fortunecookie.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
@@ -64,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
         fortuneLiveData.observe(this, (Fortune value) -> {
             showFortune();
         });
+//        fortuneLiveData.observe(this, new Observer<Fortune>() {
+//            @Override
+//            public void onChanged(Fortune value) {
+//                showFortune();
+//            }
+//        });
     }
 
     @Override
