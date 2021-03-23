@@ -6,11 +6,16 @@ import androidx.lifecycle.Observer;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import android.app.Activity;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -86,13 +91,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRefresh(View view) {
-        WorkManager workManager = WorkManager.getInstance(this);
+        if (!isConnected()) {
+            Snackbar.make(fortuneText, R.string.error_no_network, Snackbar.LENGTH_SHORT).show();
+        } else {
+            WorkManager workManager = WorkManager.getInstance(this);
 
-        OneTimeWorkRequest workRequest =
-            new OneTimeWorkRequest.Builder(GetFortuneWorker.class)
-            .build();
+            OneTimeWorkRequest workRequest =
+                new OneTimeWorkRequest.Builder(GetFortuneWorker.class)
+                    .build();
 
-        workManager.enqueue(workRequest);
+            workManager.enqueue(workRequest);
+        }
+    }
+
+    private boolean isConnected() {
+        ConnectivityManager mgr = (ConnectivityManager) this.getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = mgr.getActiveNetworkInfo();
+        boolean isConnected = networkInfo != null && networkInfo.isConnected();
+        return isConnected;
     }
 
     private void showFortune() {

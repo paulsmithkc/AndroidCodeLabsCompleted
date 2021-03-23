@@ -117,6 +117,8 @@ public class GetFortuneWorker extends Worker {
                 .setSmallIcon(R.drawable.fortune_cookie)
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .build();
 
         // show notification now
