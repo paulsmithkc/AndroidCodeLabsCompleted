@@ -34,13 +34,16 @@ public class EchoAsynchronousWorker extends ListenableWorker {
     public ListenableFuture<Result> startWork() {
         return CallbackToFutureAdapter.getFuture(resolver -> {
 
+            // create request
             Call<EchoResponse> call = dataSource.postEcho("MyWorker");
 
+            // make asynchronous request
             call.enqueue(new Callback<EchoResponse>() {
 
                 @Override
                 public void onResponse(Call<EchoResponse> call, Response<EchoResponse> response) {
 
+                    // process response...
                     EchoResponse responseBody = response.body();
                     String output = String.format(
                         "response: method=%s, message=%s, timestamp=%s",
@@ -49,16 +52,21 @@ public class EchoAsynchronousWorker extends ListenableWorker {
                         responseBody.timestamp);
                     Log.i(LOG_TAG, output);
 
+                    // worker succeeded
                     resolver.set(Result.success());
                 }
 
                 @Override
                 public void onFailure(Call<EchoResponse> call, Throwable error) {
+                    // log errors
                     Log.e(LOG_TAG, "error: " + error.getMessage(), error);
+
+                    // worker failed, retry later
                     resolver.set(Result.retry());
                 }
             });
 
+            // return request
             return call;
         });
     }

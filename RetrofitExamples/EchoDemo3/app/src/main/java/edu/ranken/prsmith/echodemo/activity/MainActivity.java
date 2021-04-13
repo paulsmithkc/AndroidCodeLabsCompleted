@@ -51,11 +51,15 @@ public class MainActivity extends AppCompatActivity {
         String message = messageEdit.getText().toString();
 
         try {
+            // create request
             Call<EchoResponse> call = dataSource.postEcho(message);
+
+            // make asynchronous request
             call.enqueue(new Callback<EchoResponse>() {
 
                 @Override
                 public void onResponse(Call<EchoResponse> call, Response<EchoResponse> response) {
+                    // process response...
                     EchoResponse responseBody = response.body();
                     responseText.setText(
                         String.format(
@@ -69,11 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<EchoResponse> call, Throwable error) {
+                    // handle errors ...
                     Log.e(LOG_TAG, "error: " + error.getMessage(), error);
                     responseText.setText(error.getMessage());
                 }
             });
         } catch (Exception ex) {
+            // handle errors ...
             Log.e(LOG_TAG, "error: " + ex.getMessage(), ex);
             responseText.setText(ex.getMessage());
         }

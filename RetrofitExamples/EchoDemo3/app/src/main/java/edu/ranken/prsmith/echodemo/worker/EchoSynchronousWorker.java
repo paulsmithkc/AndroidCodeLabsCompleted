@@ -29,10 +29,13 @@ public class EchoSynchronousWorker extends Worker {
     @Override
     public Result doWork() {
         try {
+            // create request
             Call<EchoResponse> call = dataSource.postEcho("MyWorker");
 
+            // make synchronous request
             Response<EchoResponse> response = call.execute();
 
+            // process response...
             EchoResponse responseBody = response.body();
             String output = String.format(
                 "response: method=%s, message=%s, timestamp=%s",
@@ -41,9 +44,13 @@ public class EchoSynchronousWorker extends Worker {
                 responseBody.timestamp);
             Log.i(LOG_TAG, output);
 
+            // worker succeeded
             return Result.success();
         } catch (Exception ex) {
+            // log errors
             Log.e(LOG_TAG, "error: " + ex.getMessage(), ex);
+
+            // worker failed, retry later
             return Result.retry();
         }
     }
