@@ -4,18 +4,13 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.concurrent.futures.CallbackToFutureAdapter;
-import androidx.work.ListenableWorker;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
-
-import com.google.common.util.concurrent.ListenableFuture;
 
 import edu.ranken.prsmith.echodemo.MyApp;
 import edu.ranken.prsmith.echodemo.model.EchoDataSource;
 import edu.ranken.prsmith.echodemo.network.EchoResponse;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EchoSynchronousWorker extends Worker {
