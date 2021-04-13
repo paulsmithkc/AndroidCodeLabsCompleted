@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.work.Constraints;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -43,7 +44,7 @@ public class MyApp extends Application {
                 .setInitialDelay(1, TimeUnit.SECONDS)
                 .build();
 
-        workManager.enqueue(workRequest);
+        workManager.enqueueUniqueWork("MyWorker", ExistingWorkPolicy.REPLACE, workRequest);
 
         Log.i(LOG_TAG, "scheduled workers");
     }

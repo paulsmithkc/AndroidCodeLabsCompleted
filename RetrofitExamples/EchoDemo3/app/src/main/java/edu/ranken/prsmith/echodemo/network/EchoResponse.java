@@ -1,6 +1,6 @@
-package edu.ranken.prsmith.echodemo;
+package edu.ranken.prsmith.echodemo.network;
 
-public class EchoApiResponse {
+public class EchoResponse {
     public String method;
     public String message;
     public String timestamp;

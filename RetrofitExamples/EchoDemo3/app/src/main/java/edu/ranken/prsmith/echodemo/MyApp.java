@@ -4,29 +4,31 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.work.Constraints;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-
 import java.util.concurrent.TimeUnit;
+
+import edu.ranken.prsmith.echodemo.model.EchoDataSource;
+import edu.ranken.prsmith.echodemo.worker.EchoAsynchronousWorker;
+import edu.ranken.prsmith.echodemo.worker.EchoSynchronousWorker;
 
 public class MyApp extends Application {
     private static final String LOG_TAG = MyApp.class.getSimpleName();
 
-    private RequestQueue requestQueue;
+    private EchoDataSource echoDataSource;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        requestQueue = Volley.newRequestQueue(this);
+        echoDataSource = new EchoDataSource();
         scheduleWorkers();
     }
 
-    public RequestQueue getRequestQueue() {
-        return requestQueue;
+    public EchoDataSource getEchoDataSource() {
+        return echoDataSource;
     }
 
     private void scheduleWorkers() {
@@ -38,12 +40,19 @@ public class MyApp extends Application {
                 .build();
 
         OneTimeWorkRequest workRequest =
-            new OneTimeWorkRequest.Builder(MyWorker.class)
+            new OneTimeWorkRequest.Builder(EchoAsynchronousWorker.class)
                 .setConstraints(workConstraints)
                 .setInitialDelay(1, TimeUnit.SECONDS)
                 .build();
 
-        workManager.enqueue(workRequest);
+        OneTimeWorkRequest workRequest2 =
+            new OneTimeWorkRequest.Builder(EchoSynchronousWorker.class)
+                .setConstraints(workConstraints)
+                .setInitialDelay(1, TimeUnit.SECONDS)
+                .build();
+
+        workManager.enqueueUniqueWork("MyWorker", ExistingWorkPolicy.REPLACE, workRequest);
+        workManager.enqueueUniqueWork("MyWorker2", ExistingWorkPolicy.REPLACE, workRequest2);
 
         Log.i(LOG_TAG, "scheduled workers");
     }
