@@ -18,6 +18,7 @@ import android.widget.EditText;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,7 +71,7 @@ public class NoteEditActivity extends AppCompatActivity {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("notes")
                 .document(noteId)
-                .get()
+                .get(Source.CACHE)
                 .addOnSuccessListener(task -> {
                     Log.i(LOG_TAG, "Note loaded.");
                     Note note = task.toObject(Note.class);
