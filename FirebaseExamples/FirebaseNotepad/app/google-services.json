@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1177513960",
+    "project_id": "notepad-prsmith",
+    "storage_bucket": "notepad-prsmith.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1177513960:android:991fac5396669c15047e5d",
+        "android_client_info": {
+          "package_name": "edu.ranken.prsmith.firebasenotepad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1177513960-m9sfs38m51cubh5agnkkcp7dijo6lrh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC51bi89busnxF1icsB6JJ8BLWCH7OrCGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1177513960-m9sfs38m51cubh5agnkkcp7dijo6lrh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

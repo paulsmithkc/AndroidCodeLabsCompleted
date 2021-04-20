@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bloc de notas</string>
+
+    <!-- LoginActivity -->
+    <string name="login_activity">Acceso</string>
+    <string name="login_button">Acceso</string>
+
+    <!-- NoteListActivity -->
+    <string name="note_list_activity">Mis notas</string>
+    <string name="note_list_logout">Cerrar sesión</string>
+    <string name="note_list_add">Añadir la nota</string>
+    <string name="note_list_edit">Editar nota</string>
+    <string name="note_list_delete">Borrar nota</string>
+    <string name="note_list_delete_message">¿Estás seguro de que quieres eliminar esta nota?</string>
+    <string name="note_list_delete_positive">Sí</string>
+    <string name="note_list_delete_negative">No</string>
+    <string name="item_note_edit">Editar</string>
+    <string name="item_note_delete">Borrar</string>
+
+    <!-- NoteDetailActivity -->
+    <string name="note_detail_activity">Nota</string>
+    <string name="note_detail_edit">Editar nota</string>
+    <string name="note_detail_delete">Borrar nota</string>
+    <string name="note_detail_delete_message">¿Estás seguro de que quieres eliminar esta nota?</string>
+    <string name="note_detail_delete_positive">Sí</string>
+    <string name="note_detail_delete_negative">No</string>
+
+    <!-- NoteEditActivity -->
+    <string name="note_edit_activity">Editar nota</string>
+    <string name="note_add_activity">Añadir la nota</string>
+    <string name="note_edit_title_label">Título de la nota</string>
+    <string name="note_edit_body_label">Cuerpo de la nota</string>
+    <string name="note_edit_save">Guardar nota</string>
+    <string name="note_edit_cancel">Descartar los cambios</string>
+    <string name="note_edit_title_required">Se requiere título.</string>
+    <string name="note_edit_body_required">Se requiere cuerpo.</string>
+    <string name="note_edit_cancel_message">¿Estás seguro de que quieres descartar tus cambios?</string>
+    <string name="note_edit_cancel_positive">Sí</string>
+    <string name="note_edit_cancel_negative">No</string>
+
+    <!-- Misc -->
+    <string name="get_note_error">No se pudo obtener la nota.</string>
+    <string name="generic_error">Error: %s</string>
+
+</resources>

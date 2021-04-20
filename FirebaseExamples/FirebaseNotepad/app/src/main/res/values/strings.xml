@@ -1,0 +1,46 @@
+<resources>
+
+    <string name="app_name">Notepad</string>
+
+    <!-- LoginActivity -->
+    <string name="login_activity">Login</string>
+    <string name="login_button">Login</string>
+
+    <!-- NoteListActivity -->
+    <string name="note_list_activity">My Notes</string>
+    <string name="note_list_logout">Logout</string>
+    <string name="note_list_add">Add Note</string>
+    <string name="note_list_edit">Edit Note</string>
+    <string name="note_list_delete">Delete Note</string>
+    <string name="note_list_delete_message">Are you sure that you want to delete this note?</string>
+    <string name="note_list_delete_positive">Yes</string>
+    <string name="note_list_delete_negative">No</string>
+    <string name="item_note_edit">Edit</string>
+    <string name="item_note_delete">Delete</string>
+
+    <!-- NoteDetailActivity -->
+    <string name="note_detail_activity">Note</string>
+    <string name="note_detail_edit">Edit Note</string>
+    <string name="note_detail_delete">Delete Note</string>
+    <string name="note_detail_delete_message">Are you sure that you want to delete this note?</string>
+    <string name="note_detail_delete_positive">Yes</string>
+    <string name="note_detail_delete_negative">No</string>
+
+    <!-- NoteEditActivity -->
+    <string name="note_edit_activity">Edit Note</string>
+    <string name="note_add_activity">Add Note</string>
+    <string name="note_edit_title_label">Note Title</string>
+    <string name="note_edit_body_label">Note Body</string>
+    <string name="note_edit_save">Save Note</string>
+    <string name="note_edit_cancel">Discard Changes</string>
+    <string name="note_edit_title_required">Title is required.</string>
+    <string name="note_edit_body_required">Body is required.</string>
+    <string name="note_edit_cancel_message">Are you sure that you want to discard your changes?</string>
+    <string name="note_edit_cancel_positive">Yes</string>
+    <string name="note_edit_cancel_negative">No</string>
+
+    <!-- Misc -->
+    <string name="get_note_error">Failed to get note.</string>
+    <string name="generic_error">Error: %s</string>
+
+</resources>
