@@ -46,16 +46,21 @@ public class LoginActivity extends AppCompatActivity {
         app = (NotepadApp) getApplication();
 
         // auto-login
-        String uid = app.getUserId();
-        if (uid != null && uid.length() > 0) {
-            gotoNoteList();
-        } else {
-            onLogin(loginButton);
-        }
+        loginButton.performClick();
     }
 
     public void onLogin(View view) {
         Log.i(LOG_TAG, "Starting sign-in process");
+
+        // check if user is already logged in
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            app.setUserId(user.getUid());
+            gotoNoteList();
+            return;
+        } else {
+            app.setUserId(null);
+        }
 
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
